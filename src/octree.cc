@@ -148,24 +148,30 @@ Object *iterate(Ray& ray, Voxel *voxel, Interdata& idn)
 
 		if ((fabs(oid.poif.z - voxel->min.z) < OTSIGMA) ||
 		(fabs(oid.poif.z - voxel->max.z) < OTSIGMA))
-			if (ray.direction.dz < 0.0)
+		{
+            if (ray.direction.dz < 0.0)
 				oid.normalf.dz = -1.0;
 			else
 				oid.normalf.dz = 1.0;
+		}
 
 		if ((fabs(oid.poif.x - voxel->min.x) < OTSIGMA) ||
 		(fabs(oid.poif.x - voxel->max.x) < OTSIGMA))
+		{
 			if (ray.direction.dx < 0.0)
 				oid.normalf.dx = -1.0;
 			else
 				oid.normalf.dx = 1.0;
+		}
 
 		if ((fabs(oid.poif.y - voxel->min.y) < OTSIGMA) ||
 		(fabs(oid.poif.y - voxel->max.y) < OTSIGMA))
+		{
 			if (ray.direction.dy < 0.0)
 				oid.normalf.dy = -1.0;
 			else
 				oid.normalf.dy = 1.0;
+		}
 
 		// Next, check if more than one ordinate is non-zero:
 
