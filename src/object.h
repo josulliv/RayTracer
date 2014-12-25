@@ -11,11 +11,6 @@ class Object       // An abstract class.
 	Vector normal;
 	Surface surface;
 
-	Object(void);
-
-	// The next two functions are placeholders for Object's children...
-
-	// A pure virtual function:
 	virtual Boolean icheck(Ray& aray, Interdata& id) = 0;
 	virtual void intersect(Ray& aray, Node  *nodeptr, Interdata& id) = 0;
 	virtual Point getMin(void) = 0;

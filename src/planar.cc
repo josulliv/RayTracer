@@ -11,10 +11,6 @@ extern Texture *textptr[64];
 extern int x, y;
 extern Boolean used_by_scenebuilder;
 
-Object::Object(void)
-{
-}
-
 
 Orthoplane::Orthoplane(void)
 {
