@@ -58,8 +58,9 @@ Color Dlight::getillumination(Vector normal, Vector lightvector)
 {
 	FP theta;
 	Color c;
+	Vector vector_neg = lightvector.neg();
 
-	theta = getangle(direction, lightvector.neg());	// Compute the angle.
+	theta = getangle(direction, vector_neg);	// Compute the angle.
 	if (theta > fov)	// If the POI is outside the light cone
 		return c;		// Return black (no color)
 	else				// The POI is illuminated, but how much?

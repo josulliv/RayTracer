@@ -3,6 +3,8 @@
 #ifndef _vector_h
 #define _vector_h
 
+#include "raytrace.h"
+
 class Vector
 {
 	public:

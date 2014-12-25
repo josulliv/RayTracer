@@ -37,24 +37,29 @@ Object *checktree(Ray& ray, Interdata& idn)
 
 			if ((fabs(oid.poin.z - rootvoxel.min.z) < OTSIGMA) ||
 			(fabs(oid.poin.z - rootvoxel.max.z) < OTSIGMA))
+            {
 				if (ray.direction.dz < 0.0)
 					oid.normaln.dz = -1.0;
 				else
 					oid.normaln.dz = 1.0;
-
+            }
 			if ((fabs(oid.poin.x - rootvoxel.min.x) < OTSIGMA) ||
 			(fabs(oid.poin.x - rootvoxel.max.x) < OTSIGMA))
-				if (ray.direction.dx < 0.0)
+			{
+                if (ray.direction.dx < 0.0)
 					oid.normaln.dx = -1.0;
 				else
 					oid.normaln.dx = 1.0;
+            }
 
 			if ((fabs(oid.poin.y - rootvoxel.min.y) < OTSIGMA) ||
 			(fabs(oid.poin.y - rootvoxel.max.y) < OTSIGMA))
-				if (ray.direction.dy < 0.0)
+			{
+                if (ray.direction.dy < 0.0)
 					oid.normaln.dy = -1.0;
 				else
 					oid.normaln.dy = 1.0;
+			}
 
 			// Compute a point inside the voxel.
 

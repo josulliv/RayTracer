@@ -228,15 +228,15 @@ Boolean Plane::icheck(Ray& aray, Interdata& id)
 		up[x] = u[x] - uu;
 		vp[x] = v[x] - vv;
 	}
-	
+
 	// Next, set up the counters:
-	
+
 	nc = 0;
 	if (vp[0] >= 0.0)
 		sh = 1;
 	else
 		sh = -1;
-	
+
 	for (a = 0; a < 4; a++)
 	{
 		b = (a + 1) % 4;
@@ -244,7 +244,7 @@ Boolean Plane::icheck(Ray& aray, Interdata& id)
 			nsh = -1;
 		else
 			nsh = 1;
-		
+
 		if (sh != nsh)
 		{
 			if ((up[a] >= 0.0) && (up[b] >= 0.0))
@@ -579,7 +579,7 @@ Boolean Polygon::icheck(Ray& aray, Interdata& id)
 	if (id.t < SIGMA)
 		return false;	// Intersects behind ray or at its origin.
 	id.poi = aray.getPoi(id.t);
-	
+
 	// Ok, we've determined the ray intersects with the plane containing
 	// the polygon.  Now, we'll see if it is in the polygon.
 
@@ -606,15 +606,15 @@ Boolean Polygon::icheck(Ray& aray, Interdata& id)
 		up[x] = u[x] - uu;
 		vp[x] = v[x] - vv;
 	}
-	
+
 	// Next, set up the counters:
-	
+
 	nc = 0;
 	if (vp[0] >= 0.0)
 		sh = 1;
 	else
 		sh = -1;
-	
+
 	for (a = 0; a < vertexes; a++)
 	{
 		b = (a + 1) % vertexes;
@@ -622,7 +622,7 @@ Boolean Polygon::icheck(Ray& aray, Interdata& id)
 			nsh = -1;
 		else
 			nsh = 1;
-		
+
 		if (sh != nsh)
 		{
 			if ((up[a] >= 0.0) && (up[b] >= 0.0))
@@ -792,14 +792,14 @@ Boolean Polygon::voxelicheck(Point& vmin, Point& vmax)
 			loc |= 060 & 025;
 		else if (vertex[i].z > vmax.z + SIGMA)
 			loc |= 060 & 052;
-		
+
 		j = loc;
 		if (j != 0)
 			vloc &= j;
 		else
 			return true;	// There's a vertex inside the voxel.
 	}
-	
+
 	if (vloc)	// All to one side...
 		return false;
 
@@ -963,31 +963,31 @@ istream& operator >> (istream& s, Polygon& p)
 	}
 
 	// To make the polygon-box algorithm cleaner:
-	p.vertex[p.vertexes] = p.vertex[0]; 
+	p.vertex[p.vertexes] = p.vertex[0];
 
 	if (used_by_scenebuilder == false)
 	{
 
 		// Next, compute the plane normal and distance from the first three vertexes:
-	
+
 		a = p.vertex[1] - p.vertex[0];
 		b = p.vertex[2] - p.vertex[0];
 		vecnormcross(a, b, p.normal);
-	
+
 		a.init(-p.vertex[0].x, -p.vertex[0].y, -p.vertex[0].z);
 		p.d = a * p.normal;
-	
+
 		// Allocate space for the two arrays:
-	
+
 		p.u = new FP[p.vertexes];
 		p.v = new FP[p.vertexes];
-	
+
 		// Now, throw away the coordinate whose plane-equation magn. is greatest.
-	
+
 		if ((fabs(p.normal.dx) > fabs(p.normal.dy)) && (fabs(p.normal.dx) > fabs(p.normal.dz)))
 		{
 			// Then x is greatest
-	
+
 			p.maxx = true;
 			p.maxy = false;
 			p.maxz = false;
@@ -1001,7 +1001,7 @@ istream& operator >> (istream& s, Polygon& p)
 		if (fabs(p.normal.dy) > fabs(p.normal.dz))
 		{
 			// Then y is greatest
-	
+
 			p.maxx = false;
 			p.maxy = true;
 			p.maxz = false;
@@ -1014,7 +1014,7 @@ istream& operator >> (istream& s, Polygon& p)
 		else
 		{
 			// Ok, then z is greatest!!!
-	
+
 			p.maxx = false;
 			p.maxy = false;
 			p.maxz = true;
@@ -1129,7 +1129,7 @@ void Ring::intersect(Ray& aray, Node *nodeptr, Interdata& id)
 */
 
 	Surface tsurface = surface;
-	FP uu, vv;
+//	FP uu, vv;
 
 /*	// No inverse mapping yet.
 	if (surface.texture != 0)

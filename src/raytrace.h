@@ -3,10 +3,12 @@
 #ifndef _raytrace_h
 #define _raytrace_h
 
-#include <fstream.h>		// Standard C++ stream I/O functions
+#include <fstream>		// Standard C++ stream I/O functions
+#include <iostream>
 #include <math.h>			// (ANSI)
 #include <stdio.h>		// (ANSI)
 #include <stdlib.h>		// (ANSI)
+using namespace std;
 
 #include "rstrfile.h"	// Sun Microsystems rasterfile definitions
 
