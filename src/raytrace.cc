@@ -79,7 +79,7 @@ int threshold, numberOfVoxels = 0;
 Voxel rootvoxel;
 Boolean use_octree;
 
-void main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	char *ptr, bufs[130], outfilename[130];
 	int x;
@@ -104,10 +104,11 @@ void main(int argc, char *argv[])
 
 	strcat(bufs, ".sdf");		// Slap on an extension on the SDF file name
 
+#ifdef SUNOS
 	// Next, set up a SIGFPE handler (ingore divide by zero errors):
-
 	signal(SIGFPE, (void (*)(int))catcher);
 	signal(0x0e, (void (*)(int))catcher);		// Perhaps to catch other sigs.
+#endif // SUNOS
 
 	numberOfTextures = 1;	// 0 = no texture
 	printf("Now loading the scene from the scene description file.\n\n");
@@ -285,12 +286,12 @@ void scan(char *outfilename)
 						// Pseudo-random #'s from -0.25 to 0.25:
 						jx = ((FP)rand() / 65535.0) - 0.25;
 						jy = ((FP)rand() / 65535.0) - 0.25;
-	
+
 						// Add the column number, a quarter pixel or .75 pixel,
 						// and +- 0.25 pixel jitter:
-	
+
 						aray.init(camera.origin, firstray
-						- (scrnx * (xp + 0.25 + jx + (FP)sx * 0.5))	
+						- (scrnx * (xp + 0.25 + jx + (FP)sx * 0.5))
 						- (scrny * (yp + 0.25 + jy + (FP)sy * 0.5)));
 						trace(aray, rootptr, 1.0, 0);
 						pcolor = pcolor + illuminate (rootptr, 1.0);
@@ -314,7 +315,7 @@ void scan(char *outfilename)
 						// # from -1/6 to 1/6:
 						jx = ((FP)rand() / 98301.0) - 0.166666666667;
 						jy = ((FP)rand() / 98301.0) - 0.166666666667;
-	
+
 						aray.init(camera.origin, firstray
 						- (scrnx * (xp + 0.166666666666667 + jx + (FP)sx * 0.33333333333))
 						- (scrny * (yp + 0.166666666666667 + jy + (FP)sy * 0.33333333333)));
@@ -375,11 +376,14 @@ void scan(char *outfilename)
 		{
 			fwrite(rowptr, bytes_per_pixel, hres, outfile);	// Write out a row.
 			if (storage == 5)		// Windows BMP files get special treatment...
+            {
 				if (((bytes_per_pixel * hres) % 4) != 0)	// Check for 32-bit alignment
 					fwrite(&zero, 1, ((bytes_per_pixel * hres) % 4), outfile);
-			else
+            }
+			else {
 				if (((bytes_per_pixel * hres) % 2) == 1)	// If the row width is odd
 					fwrite(&zero, 1, 1, outfile);	// Write a zero to pad the row width.
+			}
 		}
 	}
 	if (storage > 0)
@@ -566,7 +570,7 @@ void deleteTree(Node *nodeptr, Boolean root)
 	if (root == false)  delete nodeptr;
 }
 
-
+#ifdef SUNOS
 void catcher(int exceptionType, int exceptionError)
 {
 	if (exceptionType == SIGFPE)
@@ -615,5 +619,5 @@ void catcher(int exceptionType, int exceptionError)
 		exit(1);
 	}
 }
-
+#endif // SUNOS
 
