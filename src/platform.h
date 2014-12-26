@@ -1,1 +1,1 @@
-#define MAXOBJ 12500
+#define MAXOBJ 262144

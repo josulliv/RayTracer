@@ -336,9 +336,9 @@ void loadScene(char *filename)
 				exit(1);
 			}
 		}
-		if (numberOfObjects > 12499)
+		if (numberOfObjects > MAXOBJ)
 		{
-			printf("Error: the number of objects in the .sdf exceeded the allowed 12500 objects.\n");
+			printf("Error: the number of objects in the .sdf exceeded the allowed %d objects.\n", MAXOBJ);
 			printf("Ignoring the remaining objects...\n");
 			temp = -1;
 		}
