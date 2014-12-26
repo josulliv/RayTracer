@@ -1,0 +1,40 @@
+
+The sphereflake is an object consisting of a single large sphere with 9
+smaller spheres attached to its surface, each of which have 9 smaller
+spheres attached to their surfaces, etc., five levels deep.
+
+Six of the spheres are mounted at 60 degree intervals around the parent
+sphere's equator.  The other three are distributed evenly around the
+"top" hemisphere.  The bottom hemisphere of each sphere is empty, since
+that is where it's attached to its base.
+
+Start with the radius "ra", the center "center", & the up direction
+"direction". First, compute the vector pointing to heading 000.  This
+vector is in a plane containing "center" and perpendicular to
+"direction".  This vector points to the first equatorial sphere.
+Compute the first sphere.  Next, offset the vector 60 degrees from
+heading 000, still in the same plane.  Compute the next sphere.
+Continue through to sphere 6.
+
+
+
+Parent sphere: ra = 512, center = 0,0,0, direction = 0,1,0 (up).
+
+FP x, y, z;
+Ray ray;
+Sphere sphere;
+Surface surface;
+Point newcenter;
+Vector vector;
+
+for (n = 0; n < 6; n++)	// The six around the equator
+{
+	vector.init(
+	ray.init(center, vector);
+	newcenter = ray.getpoi(ra + ra / 4.0);
+	sphere.init(surface, newcenter, ra / 4.0);
+	f1 << sphere;
+}
+
+for (n = 0; n < 3; n++)	// The three in the "top" hemisphere
+{
