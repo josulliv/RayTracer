@@ -66,7 +66,7 @@ Ray camera;
 Color color, acolor, backgroundColor, ambient;
 Vector scrnx, scrny, firstray, up;
 Bmp bmp;
-FP aspect, hdeflect, scalex, scaley, minlen2;
+FP aspect, hdeflect, minlen2;
 FILE *outfile;
 rasterfile rfile;		// Declare an instance of the rasterfile header struct
 
@@ -216,6 +216,7 @@ void scan(char *outfilename)
 	if (storage == 5)	// Store in Windows BMP format
 	{
 		strcat(outfilename, ".bmp");	// Append the extension
+	    printf("\nOpening .bmp output file: %s\n", outfilename);
 		if ((outfile = fopen(outfilename, "wb")) == NULL)
 		{
 			printf("\nThe file %s cannot be opened.  Exiting...\n\n", outfilename);
@@ -258,9 +259,6 @@ void scan(char *outfilename)
 		for (x = 0; x < hres; x++)
 		{
 			xp = x;
-
-			if (y == 216)
-				xp = x;
 
 			if (supersample == 0)	// No supersampling
 			{
