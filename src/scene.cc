@@ -32,7 +32,7 @@ void loadScene(char *filename)
 {
 	int temp, textureType;
 	Point location;
-	Vector origin, direction, scrni, scrnj;
+	Vector direction, scrni, scrnj;
 	ifstream f1;
 
 	f1.open(filename);
@@ -61,29 +61,34 @@ void loadScene(char *filename)
 	f1 >> maxLevel;		// The maximum depth of the intersection tree
 	f1 >> backgroundColor;	// The color of the background
 
+	// The 'up' direction vector:
 	up.init(0.0, 1.0, 0.0);
-	origin.init(0.0, 0.0, 0.0);
+
+	// Initialize the camera:
 	camera.init(location, direction);
 	camera.unitize();
+
+	// The camera's field of view, in radians:
 	hdeflect = ((FP) fov) * DTOR;   // Convert to radians
+
+	// Compute the vector (scrni) at a right angle to the camera direction, pointed to the right.
 	if (vecnormcross(camera.direction, up, scrni) == 0.0)
 	{
 		printf("The view and up directions are identical!\n\n");
 		exit(1);
 	}
+
+	// Compute the vector (scrnj) pointing up relative to the camera:
 	vecnormcross(scrni, camera.direction, scrnj);
 
 	scrnx = scrni * 2 * tan(hdeflect * 0.5) / hres;
 	scrny = scrnj * 2 * tan(hdeflect * aspect * 0.5) / vres;
 
+    // Firstray corresponds to the upper left pixel in the image.
 	firstray = camera.direction + scrni * tan(hdeflect * 0.5)
 	- scrnj * tan(hdeflect * aspect * 0.5);
 	firstray.dx = firstray.dx + SIGMA;
 	firstray.dy = firstray.dy + SIGMA;
-
-	// Next, compute the horizontal and vertical size of a quarter-pixel.
-	scalex = tan(hdeflect * 0.5) / hres / 4;
-	scaley = tan(hdeflect * aspect * 0.5) / vres / 4;
 
 	numberOfLights = 0;
 	numberOfObjects = 0;

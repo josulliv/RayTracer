@@ -1,4 +1,5 @@
-//  Multi-threaded ray tracer with octree-encoding		J. O'Sullivan
+// Multi-threaded ray tracer with octree-encoding
+// J. O'Sullivan, 11/15/1993
 
 #include "platform.h"
 #include "raytrace.h"
@@ -61,14 +62,14 @@ int maxLevel, hres, vres, numberOfObjects, numberOfLights, numberOfTextures;
 int display, storage, order, fov;
 int bytes_per_pixel, supersample, startingline, numlines;
 char *image;
-Object *objptr[12500];
+Object *objptr[MAXOBJ];
 Light *lightptr[16];
 Texture *textptr[256];
 Ray camera;
 Color color, acolor, backgroundColor, ambient;
 Vector scrnx, scrny, firstray, up;
 FP aspect, hdeflect, scalex, scaley, minlen2;
-int objtype[12500];			// Object type codes
+int objtype[MAXOBJ];			// Object type codes
 int textype[64];			// Texture type codes
 int lightype[16];			// Light type codes
 Boolean used_by_scenebuilder = false;
@@ -76,7 +77,7 @@ int threshold, numberOfVoxels = 0;
 Voxel rootvoxel;
 Boolean use_octree;
 
-void main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	char *ptr, bufs[130], outfilename[130];
 	int x, y;
