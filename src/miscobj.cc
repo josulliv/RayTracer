@@ -1,5 +1,6 @@
 // Miscobjects.cc	Miscellaneous object's member function definitions.
 // Color, Point, Surface, Ray, Node
+// J. O'Sullivan
 
 #include "raytrace.h"
 #include "vector.h"

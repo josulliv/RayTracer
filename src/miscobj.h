@@ -1,5 +1,6 @@
 // miscobj.h	Miscellaneous object class definitions
 // (Color, Point, Surface, Ray, Node)
+// J. O'Sullivan
 
 #ifndef miscobjects_h
 #define miscobjects_h
@@ -244,7 +245,7 @@ class Node
 //	The light from the transmitted ray, the reflected ray, and the light
 //	hitting the point of intersection, including light from the light sources,
 //	ambient light, and any other light I can think of, and their weights:
-	
+
 	Point poi;	// 	The point of intersection:
 
 // 	The surface normal at the point of intersection:
@@ -286,7 +287,7 @@ class Node
 class Interdata
 {
 	public:
-	
+
 	FP t;			// The distance to the poi.
 	Point poi;		// The point of intersection
 	Vector normal;	// The normal at the poi

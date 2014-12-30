@@ -1,4 +1,5 @@
 // Vector.cc	All Vector member functions and other related functions
+// J. O'Sullivan
 
 #include "raytrace.h"
 #include "vector.h"

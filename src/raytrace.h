@@ -10,8 +10,6 @@
 #include <stdlib.h>		// (ANSI)
 using namespace std;
 
-#include "rstrfile.h"	// Sun Microsystems rasterfile definitions
-
 #define FP double			// FP is the general floating-point type.
 #define sigma 0.000001	// To compensate for precision errors.
 #define sqr(a) ((a)*(a))
@@ -42,6 +40,5 @@ typedef int Boolean;
 #define FPE_EXPLICITGEN 124
 // 124 - 127 are just made-up - there are no equivalents in unix-land.
 #endif	// SUNOS
-
 
 #endif	// Of _raytrace_h

@@ -1,5 +1,5 @@
 //		Textures.h  Contains all the texture object declarations.
-//		Started on 11/25/1992
+//		Started on 11/25/1992, J. O'Sullivan
 
 /* Texture types:
 	0: No texture - object is the color stored in surface.color.
